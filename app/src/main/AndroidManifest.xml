@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.activity.MainActivity"/>
+        <activity android:name=".controller.activity.GreedyActivity"/>
+        <activity android:name=".controller.activity.HungryActivity"/>
     </application>
 
 </manifest>

@@ -16,15 +16,15 @@ public class BaseActivity extends AppCompatActivity{
         setListener();
     }
 
-    private void setListener() {
+    protected void setListener() {
 
     }
 
-    private void initData() {
+    protected void initData() {
 
     }
 
-    private void initView() {
+    protected void initView() {
 
     }
 

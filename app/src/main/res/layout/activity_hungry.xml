@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hungry">
+    <TextView
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="表现的不错嘛!
+胜利在于坚持!"/>
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:textSize="30sp"
+        android:text="宝宝会继续加油的！"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
