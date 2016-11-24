@@ -10,9 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import cn.ucai.goddess.R;
-
 
 public class DMTabButton extends RelativeLayout
 {

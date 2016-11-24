@@ -8,6 +8,7 @@ import cn.ucai.goddess.R;
 import cn.ucai.goddess.controller.activity.GreedyActivity;
 import cn.ucai.goddess.controller.activity.HungryActivity;
 import cn.ucai.goddess.controller.activity.MainActivity;
+import cn.ucai.goddess.controller.activity.askActivity;
 
 /**
  * Created by mac-yk on 2016/11/22.
@@ -35,5 +36,8 @@ public class MFGT {
     }
     public static void gotoGreedyActivity(Context context){
         startActivity(context, GreedyActivity.class);
+    }
+    public static void gotoAskActivity(Context context){
+        startActivity(context,askActivity.class);
     }
 }

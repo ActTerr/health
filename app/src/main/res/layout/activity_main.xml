@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <FrameLayout
-        android:id="@+id/fl"
+   <cn.ucai.goddess.view.widget.MFViewPager
+       android:id="@+id/mfVp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:paddingBottom="51dp">
+
+   </cn.ucai.goddess.view.widget.MFViewPager>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+    <cn.ucai.goddess.view.widget.DMTabHost
+        android:id="@+id/tabHost"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <cn.ucai.goddess.view.widget.DMTabButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabtext="news"
+            app:drawableTop="@drawable/btn_inf">
 
+        </cn.ucai.goddess.view.widget.DMTabButton>
+        <cn.ucai.goddess.view.widget.DMTabButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabtext="diary"
+            app:drawableTop="@drawable/btn_diary">
 
-</LinearLayout>
+        </cn.ucai.goddess.view.widget.DMTabButton>
+        <cn.ucai.goddess.view.widget.DMTabButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabtext="me"
+            app:drawableTop="@drawable/btn_me">
+
+        </cn.ucai.goddess.view.widget.DMTabButton>
+    </cn.ucai.goddess.view.widget.DMTabHost>
+
+    </LinearLayout>
+</RelativeLayout>

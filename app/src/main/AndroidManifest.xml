@@ -20,6 +20,7 @@
         <activity android:name=".controller.activity.MainActivity"/>
         <activity android:name=".controller.activity.GreedyActivity"/>
         <activity android:name=".controller.activity.HungryActivity"/>
+        <activity android:name=".controller.activity.askActivity"/>
     </application>
 
 </manifest>

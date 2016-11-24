@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity{
                         e.printStackTrace();
                     }
                 }
-                MFGT.gotoMainActivity(mContext);
+                MFGT.gotoAskActivity(mContext);
             }
         }).start();
     }
