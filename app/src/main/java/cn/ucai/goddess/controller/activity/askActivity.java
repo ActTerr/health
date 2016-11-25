@@ -28,9 +28,11 @@ public class askActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_eat:
                 MFGT.gotoGreedyActivity(mContext);
+                finish();
                 break;
             case R.id.tv_hungry:
                 MFGT.gotoHungryActivity(mContext);
+                finish();
                 break;
         }
     }

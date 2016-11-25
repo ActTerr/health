@@ -38,6 +38,7 @@ public class SplashActivity extends AppCompatActivity{
                     }
                 }
                 MFGT.gotoAskActivity(mContext);
+                finish();
             }
         }).start();
     }

@@ -29,5 +29,6 @@ public class HungryActivity extends BaseActivity {
         intent.putExtra("back",true);
         intent.setClass(mContext,MainActivity.class);
         MFGT.startActivity(mContext,intent);
+        finish();
     }
 }

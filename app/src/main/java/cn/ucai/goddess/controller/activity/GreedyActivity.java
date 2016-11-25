@@ -29,5 +29,6 @@ public class GreedyActivity extends BaseActivity {
         intent.putExtra("back",true);
         intent.setClass(mContext,MainActivity.class);
         MFGT.startActivity(mContext,intent);
+        finish();
     }
 }

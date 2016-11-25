@@ -1,9 +1,10 @@
 package cn.ucai.goddess.controller.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +18,6 @@ import cn.ucai.goddess.view.widget.MFViewPager;
 
 public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
     boolean isback;
-    Fragment[] fragments;
     MainTabAdpter mAdapter;
     @BindView(R.id.tabHost)
     DMTabHost tabHost;
@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     protected void initView() {
         if(isback){
             currentIndex=1;
+
         }
         mAdapter = new MainTabAdpter(getSupportFragmentManager());
         mfVp.setAdapter(mAdapter);
@@ -50,6 +51,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         mAdapter.notifyDataSetChanged();
         tabHost.setChecked(currentIndex);
         tabHost.setOnCheckedChangeListener(this);
+        mfVp.setCurrentItem(currentIndex);
         mfVp.setOnPageChangeListener(this);
 
     }
@@ -86,5 +88,22 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
