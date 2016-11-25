@@ -86,8 +86,8 @@ public class ADCircleMonthView extends MonthView {
                     if(calendarInfo.rest == 2){//班
                         paint.setColor(theme.colorWork());
                         paint.setTextSize(theme.sizeDesc());
-                        paint.measureText("班");
-                        canvas.drawText("班", restX, restY, paint);
+                        paint.measureText("瘦");
+                        canvas.drawText("瘦", restX, restY, paint);
                     }else if(calendarInfo.rest == 1){//休息
                         paint.setColor(theme.colorRest());
                         paint.setTextSize(theme.sizeDesc());

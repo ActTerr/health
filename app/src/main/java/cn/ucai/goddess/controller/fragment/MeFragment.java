@@ -19,20 +19,31 @@ import cn.ucai.goddess.bean.Goddess;
 public class MeFragment extends BaseFragment {
     @BindView(R.id.tv_weight)
     TextView tvWeight;
+    @BindView(R.id.tv_bmi)
+    TextView tvBmi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
         ButterKnife.bind(this, view);
+        super.onCreateView(inflater,container,savedInstanceState);
         return view;
     }
 
     @Override
     protected void initView() {
-        super.initView();
-        Goddess g=new Goddess();
+
+        Log.e("main","initview被执行");
+        Goddess g = new Goddess();
         g.setWeight(56.0);
-        tvWeight.setText("体重:"+g.getWeight()+"kg");
-        Log.e("main",tvWeight.getText().toString());
+        g.setHeight(167);
+        tvWeight.setText("体重:" + g.getWeight() + "kg");
+        Log.e("main", tvWeight.getText().toString());
+        tvBmi.setText("BMI:"+getbmi(g));
+        super.initView();
+    }
+
+    private double getbmi(Goddess g) {
+        return Double.parseDouble(new java.text.DecimalFormat("#.00").format(g.getWeight()/Math.pow(g.getHeight()/100,2)));
     }
 }

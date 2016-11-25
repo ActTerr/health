@@ -98,8 +98,8 @@ public class GridMonthView extends MonthView {
 
                         paint.setTextSize(theme.sizeDesc());
                         paint.setColor(theme.colorSelectDay());
-                        paint.measureText("班");
-                        canvas.drawText("班", pointX0 + 5, pointY0 + paint.measureText("班"), paint);
+                        paint.measureText("瘦");
+                        canvas.drawText("瘦", pointX0 + 5, pointY0 + paint.measureText("瘦"), paint);
                     }else if(calendarInfo.rest == 1){//休息
                         paint.setColor(theme.colorRest());
                         canvas.drawPath(path, paint);
