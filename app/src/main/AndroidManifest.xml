@@ -17,10 +17,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.activity.MainActivity"/>
+        <activity android:name=".controller.activity.MainActivity">
+
+        </activity>
         <activity android:name=".controller.activity.GreedyActivity"/>
         <activity android:name=".controller.activity.HungryActivity"/>
         <activity android:name=".controller.activity.askActivity"/>
+        <receiver android:name=".model.receiver.AutoReceiver"
+            android:label="@string/app_name"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

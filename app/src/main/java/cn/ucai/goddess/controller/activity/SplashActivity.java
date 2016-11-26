@@ -1,10 +1,18 @@
 package cn.ucai.goddess.controller.activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import java.util.Calendar;
 
 import cn.ucai.goddess.R;
+import cn.ucai.goddess.model.receiver.AutoReceiver;
 import cn.ucai.goddess.model.utils.MFGT;
 
 /**
@@ -14,11 +22,31 @@ import cn.ucai.goddess.model.utils.MFGT;
 public class SplashActivity extends AppCompatActivity{
     private long time=2000;
     Context mContext;
+    private final static int MillisOfDay=24*60*60 * 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         mContext=this;
+        Intent intent = new Intent(this, AutoReceiver.class);
+        intent.setAction("VIDEO_TIMER");
+        // PendingIntent这个类用于处理即将发生的事情
+        PendingIntent sender = PendingIntent.getBroadcast(this, 0, intent, 0);
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        // AlarmManager.ELAPSED_REALTIME_WAKEUP表示闹钟在睡眠状态下会唤醒系统并执行提示功能，该状态下闹钟使用相对时间
+        // SystemClock.elapsedRealtime()表示手机开始到现在经过的时间
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 27);
+        calendar.set(Calendar.SECOND, 10);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long l = calendar.getTimeInMillis() - System.currentTimeMillis();
+        Log.e("main",l/1000+"");
+        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+l ,30*1000 , sender);
+        //如果使用ELAPSED_REALTIME_WAKEUP类型 应该调用SystemClock.elapsedRealtime()获取相对时间在加上你设定的延迟时间
+        //如果使用RTC_WAKEUP类型 应该调用System.currentTimeMillis()获取从1970.1.1号以来的时间在加上你设定的延迟时间
+
     }
 
     @Override

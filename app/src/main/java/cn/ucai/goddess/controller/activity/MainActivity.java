@@ -31,6 +31,8 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         ButterKnife.bind(this);
         isback = getIntent().getBooleanExtra("back", false);
         Log.e("main", isback + "");
+
+
         super.onCreate(savedInstanceState);
     }
 

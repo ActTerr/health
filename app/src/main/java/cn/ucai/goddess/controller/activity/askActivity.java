@@ -1,12 +1,19 @@
 package cn.ucai.goddess.controller.activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.goddess.R;
+import cn.ucai.goddess.model.receiver.AutoReceiver;
 import cn.ucai.goddess.model.utils.MFGT;
 
 /**
@@ -15,12 +22,15 @@ import cn.ucai.goddess.model.utils.MFGT;
 
 public class askActivity extends BaseActivity {
     Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask);
         ButterKnife.bind(this);
         mContext=this;
+
+
     }
 
     @OnClick({R.id.tv_eat, R.id.tv_hungry})
