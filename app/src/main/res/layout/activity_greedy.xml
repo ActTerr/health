@@ -2,7 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/greedy">
+   >
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+      <LinearLayout
+          android:id="@+id/ll1"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/greedy"
+          android:orientation="vertical">
     <TextView
 
         android:layout_gravity="center_horizontal"
@@ -18,4 +30,12 @@
         android:text="宝宝知道啦！"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+      </LinearLayout>
+         <LinearLayout
+             android:layout_below="@+id/ll1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@drawable/me"></LinearLayout>
+      </RelativeLayout>
+   </ScrollView>
 </LinearLayout>

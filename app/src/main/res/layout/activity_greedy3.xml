@@ -2,15 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ll_hungry"
-    android:background="@drawable/hungry">
-
+    android:background="@drawable/greedy3">
     <Button
-        android:id="@+id/btn_continue"
+        android:id="@+id/know"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="460dp"
         android:textSize="30sp"
-        android:text="宝宝会继续加油的！"
+        android:text="宝宝知道啦！"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
