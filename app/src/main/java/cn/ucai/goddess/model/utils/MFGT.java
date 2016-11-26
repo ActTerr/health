@@ -8,6 +8,7 @@ import cn.ucai.goddess.R;
 import cn.ucai.goddess.controller.activity.GreedyActivity;
 import cn.ucai.goddess.controller.activity.HungryActivity;
 import cn.ucai.goddess.controller.activity.MainActivity;
+import cn.ucai.goddess.controller.activity.SettingActivity;
 import cn.ucai.goddess.controller.activity.askActivity;
 
 /**
@@ -40,4 +41,8 @@ public class MFGT {
     public static void gotoAskActivity(Context context){
         startActivity(context,askActivity.class);
     }
+    public static void gotoSettingActivity(Context context){
+        startActivity(context, SettingActivity.class);
+    }
+
 }

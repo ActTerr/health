@@ -42,6 +42,7 @@ public class diaryFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
         mContext=this.getActivity();
+        ButterKnife.bind(this, view);
         Calendar calendar = Calendar.getInstance();
         int currYear = calendar.get(Calendar.YEAR);
         int currMonth = calendar.get(Calendar.MONTH) + 1;
@@ -62,22 +63,22 @@ public class diaryFragment extends BaseFragment {
             }
         });
         super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, view);
+
         return view;
     }
 
     @Override
     protected void initView() {
         super.initView();
-
+        File file = FileUtils.getAvatarPath((Activity) mContext, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
+        Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
+        scale.setImageBitmap(bitmap);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        File file = FileUtils.getAvatarPath((Activity) mContext, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
-        Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
-        scale.setImageBitmap(bitmap);
+
     }
 
     @OnClick(R.id.scale)

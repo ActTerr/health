@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="今天贪吃了吗？"/>
 
-        <TextView
+        <Button
             android:id="@+id/tv_eat"
             android:textSize="25sp"
             android:layout_marginTop="225dp"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="撑的不要不要的！"/>
 
-        <TextView
+        <Button
             android:id="@+id/tv_hungry"
             android:textSize="25sp"
             android:layout_marginTop="30dp"
