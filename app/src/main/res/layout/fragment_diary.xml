@@ -7,4 +7,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:textSize="30sp"
+        android:text="点击图片更新"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/scale"
+        android:src="@drawable/ask"
+        android:layout_width="240dp"
+        android:layout_height="240dp" />
 </LinearLayout>

@@ -1,18 +1,26 @@
 package cn.ucai.goddess.controller.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.ucai.goddess.I;
 import cn.ucai.goddess.R;
 import cn.ucai.goddess.controller.adapter.MainTabAdpter;
 import cn.ucai.goddess.controller.fragment.MeFragment;
 import cn.ucai.goddess.controller.fragment.diaryFragment;
 import cn.ucai.goddess.controller.fragment.informationFragment;
+import cn.ucai.goddess.model.utils.FileUtils;
+import cn.ucai.goddess.model.utils.OnSetAvatarListener;
 import cn.ucai.goddess.view.widget.DMTabHost;
 import cn.ucai.goddess.view.widget.MFViewPager;
 
@@ -24,14 +32,14 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     int currentIndex=0;
     @BindView(R.id.mfVp)
     MFViewPager mfVp;
-
+    diaryFragment diaryFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         isback = getIntent().getBooleanExtra("back", false);
         Log.e("main", isback + "");
-
+        diaryFragment=new diaryFragment();
 
         super.onCreate(savedInstanceState);
     }
@@ -48,7 +56,7 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         mfVp.setOffscreenPageLimit(3);
         mAdapter.clear();
         mAdapter.addFragment(new informationFragment(), "健康资讯");
-        mAdapter.addFragment(new diaryFragment(), "日记");
+        mAdapter.addFragment(diaryFragment, "日记");
         mAdapter.addFragment(new MeFragment(), "宝宝");
         mAdapter.notifyDataSetChanged();
         tabHost.setChecked(currentIndex);
@@ -107,5 +115,21 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode!=RESULT_OK){
+            return;
+        }
+      OnSetAvatarListener  mListener=diaryFragment.getmListener();
+        mListener.setAvatar(requestCode,data,diaryFragment.scale);
+        if (requestCode == OnSetAvatarListener.REQUEST_CROP_PHOTO) {
+            File file = FileUtils.getAvatarPath(this, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
+            Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
+            diaryFragment.scale.setImageBitmap(bitmap);
+            Log.i("main","更新照片成功");
+
+        }
     }
 }
