@@ -40,13 +40,13 @@ public class SplashActivity extends AppCompatActivity{
         // SystemClock.elapsedRealtime()表示手机开始到现在经过的时间
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        calendar.set(Calendar.MINUTE, 27);
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 10);
         calendar.set(Calendar.MILLISECOND, 0);
         long l = calendar.getTimeInMillis() - System.currentTimeMillis();
         Log.e("main",l/1000+"");
-        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+l ,30*1000 , sender);
+        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+l ,MillisOfDay , sender);
         //如果使用ELAPSED_REALTIME_WAKEUP类型 应该调用SystemClock.elapsedRealtime()获取相对时间在加上你设定的延迟时间
         //如果使用RTC_WAKEUP类型 应该调用System.currentTimeMillis()获取从1970.1.1号以来的时间在加上你设定的延迟时间
         getDateFlag();

@@ -40,7 +40,7 @@ public class diaryFragment extends BaseFragment {
     private GridCalendarView gridCalendarView;
     OnSetAvatarListener mListener;
     Context mContext;
-    Bitmap bitmap;
+    static  Bitmap bitmap;
     File file;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,7 +98,9 @@ public class diaryFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         file= FileUtils.getAvatarPath((Activity) mContext, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
-        bitmap= BitmapFactory.decodeFile(String.valueOf(file));
+        if (bitmap==null){
+            bitmap= BitmapFactory.decodeFile(String.valueOf(file));
+        }
         scale.setImageBitmap(bitmap);
         Log.e("main","fragment的onResume被执行");
     }
@@ -112,10 +114,21 @@ public class diaryFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        file=null;
-        bitmap.recycle();
-        bitmap=null;
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (bitmap!=null){
+            bitmap.recycle();
+        }
     }
 
     public OnSetAvatarListener getmListener() {

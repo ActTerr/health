@@ -172,12 +172,12 @@ public class OnSetAvatarListener implements View.OnClickListener {
         switch (requestCode) {
             case REQUEST_CHOOSE_PHOTO:
                 if (data != null) {
-                    startCropPhotoActivity(data.getData(), 300,300,REQUEST_CROP_PHOTO);
+                    startCropPhotoActivity(data.getData(), 200,200,REQUEST_CROP_PHOTO);
                 }
                 break;
             case REQUEST_TAKE_PICTURE:
                 if (data != null) {
-                    startCropPhotoActivity2(data.getData(), 300, 300,REQUEST_CROP_PHOTO);
+                    startCropPhotoActivity2(data.getData(), 200, 200,REQUEST_CROP_PHOTO);
                     closePopuAvatar();
                     Log.e("main","拍照完成");
                 }
