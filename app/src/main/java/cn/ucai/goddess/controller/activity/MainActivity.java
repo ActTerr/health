@@ -29,26 +29,26 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
     MainTabAdpter mAdapter;
     @BindView(R.id.tabHost)
     DMTabHost tabHost;
-    int currentIndex=0;
+    int currentIndex = 0;
     @BindView(R.id.mfVp)
     MFViewPager mfVp;
     diaryFragment diaryFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         isback = getIntent().getBooleanExtra("back", false);
         Log.e("main", isback + "");
-        diaryFragment=new diaryFragment();
-
+        diaryFragment = new diaryFragment();
         super.onCreate(savedInstanceState);
     }
 
 
     @Override
     protected void initView() {
-        if(isback){
-            currentIndex=1;
+        if (isback) {
+            currentIndex = 1;
 
         }
         mAdapter = new MainTabAdpter(getSupportFragmentManager());
@@ -104,8 +104,8 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
-            if((System.currentTimeMillis()-exitTime) > 2000){
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
@@ -116,19 +116,20 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         }
         return super.onKeyDown(keyCode, event);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode!=RESULT_OK){
+        if (resultCode != RESULT_OK) {
             return;
         }
-        OnSetAvatarListener mListener=diaryFragment.getmListener();
-        mListener.setAvatar(requestCode,data,diaryFragment.scale);
+        OnSetAvatarListener mListener = diaryFragment.getmListener();
+        mListener.setAvatar(requestCode, data, diaryFragment.scale);
         if (requestCode == OnSetAvatarListener.REQUEST_CROP_PHOTO) {
             File file = FileUtils.getAvatarPath(this, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
-            Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
+            Bitmap bitmap = BitmapFactory.decodeFile(String.valueOf(file));
             diaryFragment.scale.setImageBitmap(bitmap);
-            Log.e("main","更新照片成功");
+            Log.e("main", "更新照片成功");
 
         }
     }
