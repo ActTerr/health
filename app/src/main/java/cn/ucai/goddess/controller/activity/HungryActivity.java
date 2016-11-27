@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.goddess.I;
 import cn.ucai.goddess.R;
-import cn.ucai.goddess.model.dao.DBManager;
+import cn.ucai.goddess.model.dao.CalendarDao;
 import cn.ucai.goddess.model.utils.MFGT;
 
 /**
@@ -35,10 +35,13 @@ public class HungryActivity extends BaseActivity {
         SharedPreferences sp=getSharedPreferences("date",MODE_PRIVATE);
         String date=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         sp.edit().putString("date",date).commit();
-        DBManager.getInstance().saveCalendar(date, I.HUNGRY);
+        CalendarDao calendarDao=new CalendarDao(this);
+        calendarDao.saveCalendar(date,I.HUNGRY);
         SharedPreferences sp1=getSharedPreferences("goddess",MODE_PRIVATE);
-        double weight= Double.parseDouble(sp1.getString("weight",""))-0.1;
-        sp1.edit().putString("weight", String.valueOf(weight)).commit();
+        if (!sp1.getString("weight","").equals("")){
+            double weight= Double.parseDouble(sp1.getString("weight",""))-0.1;
+            sp1.edit().putString("weight", String.valueOf(weight)).commit();
+        }
         super.onCreate(savedInstanceState);
     }
 
