@@ -33,6 +33,9 @@ public class GreedyActivity extends BaseActivity {
         String date=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         sp.edit().putString("date", date).commit();
         DBManager.getInstance().saveCalendar(date, I.GREEDY);
+        SharedPreferences sp1=getSharedPreferences("goddess",MODE_PRIVATE);
+        double weight= Double.parseDouble(sp1.getString("weight",""))+0.1;
+        sp1.edit().putString("weight", String.valueOf(weight)).commit();
         super.onCreate(savedInstanceState);
     }
 

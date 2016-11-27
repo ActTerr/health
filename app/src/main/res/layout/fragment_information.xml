@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_height="match_parent"
+    android:background="@drawable/set">
+    <Button
+        android:id="@+id/btn_web"
+        android:layout_marginTop="400dp"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="inf"
-        android:textSize="50sp"/>
+        android:text="点击浏览资讯"/>
 </LinearLayout>
