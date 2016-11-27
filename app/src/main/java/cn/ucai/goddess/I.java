@@ -6,4 +6,9 @@ package cn.ucai.goddess;
 
 public interface I {
     String AVATAR_TYPE_USER_PATH= "user_avatar";
+
+    public interface Calendar {
+
+        String TABLE_NAME ="calendar" ;
+    }
 }

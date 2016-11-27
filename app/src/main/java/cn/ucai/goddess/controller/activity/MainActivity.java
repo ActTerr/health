@@ -122,13 +122,13 @@ public class MainActivity extends BaseActivity implements DMTabHost.OnCheckedCha
         if(resultCode!=RESULT_OK){
             return;
         }
-      OnSetAvatarListener  mListener=diaryFragment.getmListener();
+        OnSetAvatarListener mListener=diaryFragment.getmListener();
         mListener.setAvatar(requestCode,data,diaryFragment.scale);
         if (requestCode == OnSetAvatarListener.REQUEST_CROP_PHOTO) {
             File file = FileUtils.getAvatarPath(this, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
             Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
             diaryFragment.scale.setImageBitmap(bitmap);
-            Log.i("main","更新照片成功");
+            Log.e("main","更新照片成功");
 
         }
     }

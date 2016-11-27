@@ -1,19 +1,16 @@
 package cn.ucai.goddess.controller.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.goddess.R;
-import cn.ucai.goddess.model.receiver.AutoReceiver;
 import cn.ucai.goddess.model.utils.MFGT;
 
 /**
@@ -29,7 +26,8 @@ public class askActivity extends BaseActivity {
         setContentView(R.layout.activity_ask);
         ButterKnife.bind(this);
         mContext=this;
-
+        SharedPreferences sp=getSharedPreferences("date",MODE_PRIVATE);
+        sp.edit().putString("date", new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())).commit();
 
     }
 

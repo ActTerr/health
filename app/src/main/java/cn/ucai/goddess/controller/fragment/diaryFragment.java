@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,15 +71,16 @@ public class diaryFragment extends BaseFragment {
     @Override
     protected void initView() {
         super.initView();
-        File file = FileUtils.getAvatarPath((Activity) mContext, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
-        Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
-        scale.setImageBitmap(bitmap);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
+        File file = FileUtils.getAvatarPath((Activity) mContext, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
+        Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
+        scale.setImageBitmap(bitmap);
+        Log.e("main","fragment的onResume被执行");
     }
 
     @OnClick(R.id.scale)

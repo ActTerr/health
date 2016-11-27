@@ -4,11 +4,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import cn.ucai.goddess.R;
@@ -22,6 +24,7 @@ import cn.ucai.goddess.model.utils.MFGT;
 public class SplashActivity extends AppCompatActivity{
     private long time=2000;
     Context mContext;
+    String date;
     private final static int MillisOfDay=24*60*60 * 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,12 @@ public class SplashActivity extends AppCompatActivity{
         am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+l ,30*1000 , sender);
         //如果使用ELAPSED_REALTIME_WAKEUP类型 应该调用SystemClock.elapsedRealtime()获取相对时间在加上你设定的延迟时间
         //如果使用RTC_WAKEUP类型 应该调用System.currentTimeMillis()获取从1970.1.1号以来的时间在加上你设定的延迟时间
+        getDateFlag();
+    }
 
+    private void getDateFlag() {
+        SharedPreferences sp=getSharedPreferences("date",MODE_PRIVATE);
+        date=sp.getString("date","");
     }
 
     @Override
@@ -65,8 +73,15 @@ public class SplashActivity extends AppCompatActivity{
                         e.printStackTrace();
                     }
                 }
-                MFGT.gotoAskActivity(mContext);
-                finish();
+                String curDate=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                Log.e("main",date+":"+curDate);
+                if (!date.equals(curDate)){
+                    MFGT.gotoAskActivity(mContext);
+                    finish();
+                }else {
+                    MFGT.gotoMainActivity(mContext);
+                }
+
             }
         }).start();
     }

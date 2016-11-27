@@ -150,6 +150,7 @@ public class OnSetAvatarListener implements View.OnClickListener {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         mActivity.startActivityForResult(intent,REQUEST_TAKE_PICTURE);
+
     }
 
     /**
@@ -176,10 +177,13 @@ public class OnSetAvatarListener implements View.OnClickListener {
                 break;
             case REQUEST_TAKE_PICTURE:
                 if (data != null) {
-                    startCropPhotoActivity(data.getData(), 200, 200,REQUEST_CROP_PHOTO);
+                    startCropPhotoActivity2(data.getData(), 300, 300,REQUEST_CROP_PHOTO);
+                    closePopuAvatar();
+                    Log.e("main","拍照完成");
                 }
                 break;
             case REQUEST_CROP_PHOTO:
+                Log.e("main","开始保存");
                 saveCropAndShowAvatar(ivAvatar, data);
                 closePopuAvatar();
                 break;
@@ -255,8 +259,21 @@ public class OnSetAvatarListener implements View.OnClickListener {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         mActivity.startActivityForResult(intent,requestCode);
+        Log.e("main","将意图发给main");
     }
 
+    private void startCropPhotoActivity2(Uri uri, int outputX, int outputY, int requestCode) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("outputX", outputX);
+        intent.putExtra("outputY", outputY);
+        intent.putExtra("return-data", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+//          mActivity.startActivityForResult(intent,requestCode);
+        closePopuAvatar();
+        Log.e("main","将意图发给main");
+    }
     /**
      * 返回拍照文件保存的位置
      * @return
