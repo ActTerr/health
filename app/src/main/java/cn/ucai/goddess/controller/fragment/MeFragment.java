@@ -64,5 +64,6 @@ public class MeFragment extends BaseFragment {
     @OnClick(R.id.me_set)
     public void onClick() {
         MFGT.gotoSettingActivity(this.getActivity());
+        MFGT.finish(this.getActivity());
     }
 }

@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.goddess.R;
+import cn.ucai.goddess.model.utils.MFGT;
 
 /**
  * Created by mac-yk on 2016/11/26.
@@ -56,5 +57,12 @@ public class SettingActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MFGT.gotoMainActivity(this);
+        finish();
     }
 }

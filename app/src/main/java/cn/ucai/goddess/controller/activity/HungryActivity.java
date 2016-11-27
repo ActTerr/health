@@ -2,15 +2,20 @@ package cn.ucai.goddess.controller.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.ucai.goddess.I;
 import cn.ucai.goddess.R;
+import cn.ucai.goddess.model.dao.DBManager;
 import cn.ucai.goddess.model.utils.MFGT;
 
 /**
@@ -27,6 +32,10 @@ public class HungryActivity extends BaseActivity {
         setContentView(R.layout.activity_hungry);
         ButterKnife.bind(this);
         mContext = this;
+        SharedPreferences sp=getSharedPreferences("date",MODE_PRIVATE);
+        String date=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        sp.edit().putString("date",date).commit();
+        DBManager.getInstance().saveCalendar(date, I.HUNGRY);
         super.onCreate(savedInstanceState);
     }
 

@@ -32,6 +32,9 @@ public class MFGT {
     public static void gotoMainActivity(Context context){
         startActivity(context, MainActivity.class);
     }
+    public static void backMainActivity(Context context){
+        startActivity(context,MainActivity.class);
+    }
     public static void gotoHungryActivity(Context context){
         startActivity(context, HungryActivity.class);
     }

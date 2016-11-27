@@ -6,6 +6,8 @@ package cn.ucai.goddess;
 
 public interface I {
     String AVATAR_TYPE_USER_PATH= "user_avatar";
+    int HUNGRY =2 ;
+    int GREEDY =1 ;
 
     public interface Calendar {
 

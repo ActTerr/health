@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import cn.ucai.goddess.bean.DateBean;
 
@@ -25,6 +28,7 @@ public class DBManager {
             dbHelper.close();
         }
     }
+
     public synchronized boolean saveCalendar(String date,int flag){
         SQLiteDatabase database=dbHelper.getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -47,5 +51,21 @@ public class DBManager {
             return datebean;
         }
         return datebean;
+    }
+
+    public synchronized ArrayList<DateBean> getAll() {
+        ArrayList<DateBean> dates=new ArrayList<>();
+        SQLiteDatabase database=dbHelper.getReadableDatabase();
+        DateBean datebean=null;
+        String sql="SELECT * FROM "+CalendarDao.CALENDAR_TABLE_TIME;
+        Cursor cursor = database.rawQuery(sql,null);
+        while(cursor.moveToNext()){
+            datebean=new DateBean();
+            datebean.setDate(cursor.getString(cursor.getColumnIndex(CalendarDao.DATE)));
+            datebean.setFlag(cursor.getInt(cursor.getColumnIndex(CalendarDao.FLAG)));
+            dates.add(datebean);
+            Log.e("main","加载一天的数据");
+        }
+        return dates;
     }
 }

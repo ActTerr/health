@@ -1,5 +1,9 @@
 package cn.ucai.goddess.model.dao;
 
+import android.content.Context;
+
+import java.util.ArrayList;
+
 import cn.ucai.goddess.bean.DateBean;
 
 /**
@@ -13,7 +17,14 @@ public class CalendarDao {
     public boolean saveCalendar(String date,int flag){
         return DBManager.getInstance().saveCalendar(date,flag);
     }
+    public CalendarDao(Context context){
+        DBManager.getInstance().OnInit(context);
+        DBOpenHelper.onInit(context);
+    }
     public DateBean getCalendar(String date){
         return  DBManager.getInstance().getCalendar(date);
+    }
+    public ArrayList<DateBean> getAll(){
+        return  DBManager.getInstance().getAll();
     }
 }

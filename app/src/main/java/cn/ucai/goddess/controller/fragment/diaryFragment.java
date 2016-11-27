@@ -18,7 +18,6 @@ import com.dsw.calendar.views.GridCalendarView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,6 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.goddess.I;
 import cn.ucai.goddess.R;
+import cn.ucai.goddess.bean.DateBean;
+import cn.ucai.goddess.model.dao.CalendarDao;
 import cn.ucai.goddess.model.utils.FileUtils;
 import cn.ucai.goddess.model.utils.OnSetAvatarListener;
 
@@ -39,21 +40,37 @@ public class diaryFragment extends BaseFragment {
     private GridCalendarView gridCalendarView;
     OnSetAvatarListener mListener;
     Context mContext;
+    Bitmap bitmap;
+    File file;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_diary, container, false);
         mContext=this.getActivity();
         ButterKnife.bind(this, view);
-        Calendar calendar = Calendar.getInstance();
-        int currYear = calendar.get(Calendar.YEAR);
-        int currMonth = calendar.get(Calendar.MONTH) + 1;
+        initCalendar(view);
+
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        return view;
+    }
+
+    private void initCalendar(View view) {
+//        Calendar calendar = Calendar.getInstance();
+//        int currYear = calendar.get(Calendar.YEAR);
+//        int currMonth = calendar.get(Calendar.MONTH) + 1;
         List<CalendarInfo> list = new ArrayList<CalendarInfo>();
-        list.add(new CalendarInfo(currYear, currMonth, 1, null, 1));
-        list.add(new CalendarInfo(currYear, currMonth, 21, null, 1));
-        list.add(new CalendarInfo(currYear, currMonth, 17, null, 2));
-        list.add(new CalendarInfo(currYear, currMonth, 18, null, 2));
-        list.add(new CalendarInfo(currYear, currMonth, 19, null, 2));
-        list.add(new CalendarInfo(currYear, currMonth, 20, null, 2));
+//        list.add(new CalendarInfo(currYear, currMonth, 1, null, 1));
+        CalendarDao dao=new CalendarDao(this.getActivity());
+        ArrayList<DateBean> dates= dao.getAll();
+        for (int i=0;i<dates.size();i++){
+            DateBean date=dates.get(i);
+            int currYear= Integer.parseInt(date.getDate().substring(0,4));
+            int currMonth= Integer.parseInt(date.getDate().substring(5,7));
+            int currday= Integer.parseInt(date.getDate().substring(8,10));
+            int flag=date.getFlag();
+            list.add(new CalendarInfo(currYear,currMonth,currday,null,flag));
+        }
+
         gridCalendarView = (GridCalendarView) view.findViewById(R.id.gridMonthView);
         gridCalendarView.setCalendarInfos(list);
         gridCalendarView.setDateClick(new MonthView.IDateClick() {
@@ -63,9 +80,6 @@ public class diaryFragment extends BaseFragment {
                 Toast.makeText(getActivity(), "点击了" + year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
             }
         });
-        super.onCreateView(inflater, container, savedInstanceState);
-
-        return view;
     }
 
     @Override
@@ -75,10 +89,16 @@ public class diaryFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        File file = FileUtils.getAvatarPath((Activity) mContext, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
-        Bitmap bitmap= BitmapFactory.decodeFile(String.valueOf(file));
+        file= FileUtils.getAvatarPath((Activity) mContext, I.AVATAR_TYPE_USER_PATH, "孟宇飞" + ".jpg");
+        bitmap= BitmapFactory.decodeFile(String.valueOf(file));
         scale.setImageBitmap(bitmap);
         Log.e("main","fragment的onResume被执行");
     }
@@ -89,6 +109,15 @@ public class diaryFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        file=null;
+        bitmap.recycle();
+        bitmap=null;
+
+    }
+
     public OnSetAvatarListener getmListener() {
         return mListener;
     }
@@ -96,4 +125,5 @@ public class diaryFragment extends BaseFragment {
     public void setmListener(OnSetAvatarListener mListener) {
         this.mListener = mListener;
     }
+
 }

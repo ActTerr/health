@@ -21,6 +21,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         super(context,getCalendarDatabaseName(), null, 1);
     }
 
+    public static DBOpenHelper onInit(Context context){
+        if(instance==null){
+            instance=new DBOpenHelper(context);
+        }
+        return instance;
+    }
+
     private static String getCalendarDatabaseName() {
         return I.Calendar.TABLE_NAME+"_demo.db";
     }

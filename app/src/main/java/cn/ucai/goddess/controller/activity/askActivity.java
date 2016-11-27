@@ -26,8 +26,6 @@ public class askActivity extends BaseActivity {
         setContentView(R.layout.activity_ask);
         ButterKnife.bind(this);
         mContext=this;
-        SharedPreferences sp=getSharedPreferences("date",MODE_PRIVATE);
-        sp.edit().putString("date", new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())).commit();
 
     }
 
