@@ -3,7 +3,10 @@ package cn.ucai.goddess.controller.activity;
 import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -57,6 +60,13 @@ public class SettingActivity extends BaseActivity {
         final Dialog dialog=new Dialog(this);
         final View view = getLayoutInflater().inflate(R.layout.dialog_set, null);
         dialog.setContentView(view);
+        Window dialogWindow = dialog.getWindow();
+        WindowManager m = getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+        WindowManager.LayoutParams p = dialogWindow.getAttributes(); // 获取对话框当前的参数值
+        p.height = (int) (d.getHeight() * 0.3); // 高度设置为屏幕的X
+        p.width = (int) (d.getWidth() * 0.65); // 宽度设置为屏幕的X
+        dialogWindow.setAttributes(p);
         dialog.setTitle("验证密码");
         dialog.show();
 
@@ -70,6 +80,7 @@ public class SettingActivity extends BaseActivity {
                     sp.edit().putString("age",setAge.getText().toString())
                             .putString("height",setHeight.getText().toString())
                             .putString("weight",setWeight.getText().toString()).commit();
+                    MFGT.gotoMainActivity(SettingActivity.this);
                     finish();
                 }else {
                     Toast.makeText(SettingActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
